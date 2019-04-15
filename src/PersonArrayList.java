@@ -111,66 +111,30 @@ public class PersonArrayList {
         size++;
     }
 
-//    public int indexOf(Object o) {
-//        if (o == null) {
-//            for (int i = 0; i < size; i++)
-//                if (elementData[i]==null)
-//                    return i;
-//        } else {
-//            for (int i = 0; i < size; i++)
-//                if (o.equals(elementData[i]))
-//                    return i;
-//        }
-//        return -1;
-//    }
 
     public int indexOf(Person p) {
-        if (p == null) {
-            for (int i = 0; i < size; i++) {
-                if (list[i] == null) {
-                    return i;
-                }
+        int index = -1;
+
+        for (int i = 0; i < size && index == -1; i++) {
+            if (p.equals(list[i])) {
+                index = i;
             }
         }
-        else {
-            for (int i = 0; i < size; i++) {
-                if (p.equals(list[i])) {
-                    return i;
-                }
-            }
-        }
-        return - 1;
+
+        return index;
 
     }
 
-//    public int lastIndexOf(Object o) {
-//        if (o == null) {
-//            for (int i = size-1; i >= 0; i--)
-//                if (elementData[i]==null)
-//                    return i;
-//        } else {
-//            for (int i = size-1; i >= 0; i--)
-//                if (o.equals(elementData[i]))
-//                    return i;
-//        }
-//        return -1;
-//    }
 
     public int lastIndexOf(Person p) {
-        if (p == null) {
-            for (int i = size - 1; i >= 0; i--) {
-                if (list[i] == null) {
-                    return i;
-                }
+        int index = -1;
+
+        for (int i = size - 1; i >= 0 && index == -1; i--) {
+            if (p.equals(list[i])) {
+                index = i;
             }
         }
-        else {
-            for (int i = size - 1; i >= 0; i--) {
-                if (p.equals(list[i])) {
-                    return i;
-                }
-            }
-        }
+
         return -1;
 
     }
@@ -183,12 +147,10 @@ public class PersonArrayList {
     public boolean removeAll(PersonArrayList personArrayList) {
 
         boolean flag = false;
-        int newSize = this.size;
 
-        for (int i = 0; i < size; i++) {
-            if (list[i].equals(personArrayList)) {
-                System.arraycopy(list, i + 1,list, i, size - newSize - 1);
-                newSize--;
+        for (int i = size - 1; i >= 0; i--) {
+            if (personArrayList.contains(list[i])) {
+                remove(i);
                 flag = true;
             }
         }
@@ -204,18 +166,13 @@ public class PersonArrayList {
     public boolean retainAll(PersonArrayList personArrayList) {
 
         boolean flag = false;
-        int newSize = this.size;
-        int index = 0;
 
         for (int i = 0; i < size; i++) {
-            if (list[i].equals(personArrayList)) {
-                System.arraycopy(list, i,list, index, newSize);
-                index++;
-                newSize--;
+            if (!personArrayList.contains(list[i])) {
+                remove(i);
                 flag = true;
             }
         }
-
         return flag;
 
     }
@@ -227,16 +184,10 @@ public class PersonArrayList {
     public boolean removeIf(PersonEvaluator eval) {
 
         boolean flag = false;
-        int newSize = this.size;
-        int index = 0;
 
-        Evaluator evaluator = new Evaluator();
-
-        for (int i = 0; i < size; i++) {
-            if (list[i].equals(eval)) {
-                System.arraycopy(list, i,list, index, newSize);
-                index++;
-                newSize--;
+        for (int i = size - 1; i >= 0; i--) {
+            if (eval.test(list[i])) {
+                remove(i);
                 flag = true;
             }
         }
@@ -245,6 +196,16 @@ public class PersonArrayList {
 
     }
 
+    private boolean contains(Person p) {
+        boolean flag = false;
 
+        for (int i = 0; i < size && !flag; i++) {
+            if (list[i].equals(p)) {
+                flag = true;
+            }
+        }
+
+        return flag;
+    }
 
 }
