@@ -203,9 +203,43 @@ public class PersonArrayList {
 
     public boolean retainAll(PersonArrayList personArrayList) {
 
+        boolean flag = false;
+        int newSize = this.size;
+        int index = 0;
+
+        for (int i = 0; i < size; i++) {
+            if (list[i].equals(personArrayList)) {
+                System.arraycopy(list, i,list, index, newSize);
+                index++;
+                newSize--;
+                flag = true;
+            }
+        }
+
+        return flag;
+
     }
 
+//    boolean removeIf(PersonEvaluator eval) – Removes from the current PersonArrayList
+//    object all Person objects that causes the test method to return true. The method
+//    returns true if at least one Person object is removed. Otherwise, return false.
+
     public boolean removeIf(PersonEvaluator eval) {
+
+        boolean flag = false;
+        int newSize = this.size;
+        int index = 0;
+
+        for (int i = 0; i < size; i++) {
+            if (list[i].test(eval) ) {
+                System.arraycopy(list, i,list, index, newSize);
+                index++;
+                newSize--;
+                flag = true;
+            }
+        }
+
+        return flag;
 
     }
 
