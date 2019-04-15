@@ -230,8 +230,10 @@ public class PersonArrayList {
         int newSize = this.size;
         int index = 0;
 
+        Evaluator evaluator = new Evaluator();
+
         for (int i = 0; i < size; i++) {
-            if (list[i].test(eval) ) {
+            if (list[i].equals(eval)) {
                 System.arraycopy(list, i,list, index, newSize);
                 index++;
                 newSize--;
