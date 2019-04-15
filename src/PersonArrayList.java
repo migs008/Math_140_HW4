@@ -13,13 +13,15 @@ public class PersonArrayList {
 //        object.
 
     public PersonArrayList(PersonArrayList personArrayList) {
-        int personArrayListLength = personArrayList.size; // why personArrayList.length not work?
+        int personArrayListSize = personArrayList.size; // length(total max length of an array) vs size(number of occupied elements in array) methods different.
 
-        this.list
+        this.list = new Person[personArrayListSize];
 
-        return list[personArrayList.length];
+        for (int i = 0; i < list.length; i++) {
+            this.list[i] = personArrayList.list[i].copy();
+        }
 
-
+        this.size = personArrayListSize;
 
     }
 
@@ -107,6 +109,76 @@ public class PersonArrayList {
         System.arraycopy(list, index, list, index + 1, size - index);
         list[index] = p;
         size++;
+    }
+
+//    public int indexOf(Object o) {
+//        if (o == null) {
+//            for (int i = 0; i < size; i++)
+//                if (elementData[i]==null)
+//                    return i;
+//        } else {
+//            for (int i = 0; i < size; i++)
+//                if (o.equals(elementData[i]))
+//                    return i;
+//        }
+//        return -1;
+//    }
+
+    public int indexOf(Person p) {
+        if (p == null) {
+            for (int i = 0; i < size; i++) {
+                if (list[i] == null) {
+                    return i;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < size; i++) {
+                if (p.equals(list[i])) {
+                    return i;
+                }
+            }
+        }
+        return - 1;
+
+    }
+
+//    public int lastIndexOf(Object o) {
+//        if (o == null) {
+//            for (int i = size-1; i >= 0; i--)
+//                if (elementData[i]==null)
+//                    return i;
+//        } else {
+//            for (int i = size-1; i >= 0; i--)
+//                if (o.equals(elementData[i]))
+//                    return i;
+//        }
+//        return -1;
+//    }
+
+    public int lastIndexOf(Person p) {
+        if (p == null) {
+            for (int i = size - 1; i >= 0; i--) {
+                if (list[i] == null) {
+                    return i;
+                }
+            }
+        }
+        else {
+            for (int i = size - 1; i >= 0; i--) {
+                if (p.equals(list[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+
+    }
+
+    
+
+    public boolean removeAll(PersonArrayList personArrayList) {
+
     }
 
 
