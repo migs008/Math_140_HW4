@@ -175,9 +175,37 @@ public class PersonArrayList {
 
     }
 
-    
+//    boolean removeAll(PersonArrayList personArrayList) – Removes from the current
+//    PersonArrayList object all of its elements that are equal to a Person object in the input
+//    parameter. Returns true if at least one Person object is removed. Otherwise, return
+//            false.
 
     public boolean removeAll(PersonArrayList personArrayList) {
+
+        boolean flag = false;
+        int newSize = this.size;
+
+        for (int i = 0; i < size; i++) {
+            if (list[i].equals(personArrayList)) {
+                System.arraycopy(list, i + 1,list, i, size - newSize - 1);
+                newSize--;
+                flag = true;
+            }
+        }
+
+        return flag;
+
+    }
+
+//    boolean retainAll(PersonArrayList personArrayList) – Retains only the elements in the
+//    current PersonArrayList that are equal to a Person object in the input parameter.
+//            Returns true if at least one Person object is removed. Otherwise, return false.
+
+    public boolean retainAll(PersonArrayList personArrayList) {
+
+    }
+
+    public boolean removeIf(PersonEvaluator eval) {
 
     }
 
