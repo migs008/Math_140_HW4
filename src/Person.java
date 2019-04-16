@@ -1,10 +1,14 @@
+/*
+Author: Miguel Aquino
+Date: 4/15/2019
+Purpose: A Person class that implements Comparable.
+*/
+
 public class Person implements Comparable<Person> {
 
     private String firstName;
     private String lastName;
     private int age;
-
-
 
     public Person(String firstName, String lastName, int age) {
         this.firstName = firstName;
@@ -61,10 +65,12 @@ public class Person implements Comparable<Person> {
                 && lastName.equals(other.lastName);
     }
 
+    /*
+    Purpose: Returns an exact and independent copy of the current Person object.
+    Parameters: None
+    Return: Copy of current Person object.
+    */
 
-    //    Person copy() – Returns an exact copy of the current Person object. The copy should be
-    //    independent of the current Person object. Therefore, changing the instance variables of
-    //    the copy should not change the instance variables of the current Person object.
     public Person copy() {
         Person personCopy = new Person(this.firstName, this.lastName, this.age);
         return personCopy;
